@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lost & Found Central Hub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafc;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2c3e50;
+      color: white;
+      padding: 15px 25px;
+      border-bottom: 3px solid #1abc9c;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    select, input[type="text"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 220px;
+      font-size: 14px;
+    }
+    input[type="submit"] {
+      background: #1abc9c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s ease-in-out;
+    }
+    input[type="submit"]:hover {
+      background: #16a085;
+    }
+    .report {
+      background: #fff;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease-in-out;
+    }
+    .report:hover {
+      transform: scale(1.01);
+    }
+    .lost {
+      border-left: 6px solid #e74c3c;
+    }
+    .found {
+      border-left: 6px solid #27ae60;
+    }
+    .report h2 {
+      margin: 0 0 10px 0;
+      color: #2c3e50;
+    }
+    .meta {
+      color: #7f8c8d;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .desc {
+      margin: 10px 0;
+      font-size: 15px;
+      color: #34495e;
+    }
+    .phone {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    .report img {
+      max-width: 180px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <span>📌 Lost & Found Central Hub</span>
+    <a href="{% url 'dashboard' %}">⬅ Back to Dashboard</a>
+  </div>
+
+  <div class="container">
+    <h1>All Lost & Found Reports</h1>
+
+    <!-- Filters -->
+    <!-- Filters -->
+    <form method="get" class="filters" id="filterForm">
+      <select name="report_type" id="reportType">
+        <option value="">All</option>
+        <option value="lost" {% if selected_type == "lost" %}selected{% endif %}>Lost</option>
+        <option value="found" {% if selected_type == "found" %}selected{% endif %}>Found</option>
+      </select>
+
+      <input type="text" name="q" placeholder="Search item, location, description..." 
+            value="{{ search_query }}">
+
+      <input type="submit" value="Search">
+    </form>
+
+    <script>
+      // Automatically submit form when category changes
+      const reportType = document.getElementById('reportType');
+      const filterForm = document.getElementById('filterForm');
+
+      reportType.addEventListener('change', () => {
+        filterForm.submit();
+      });
+    </script>
+
+
+    <!-- Report Feed -->
+    {% for report in reports %}
+      <div class="report {% if report.report_type == 'lost' %}lost{% else %}found{% endif %}">
+        <h2>{{ report.item_name }} ({{ report.report_type|title }})</h2>
+        <p class="meta">
+          Reported by: <b>{{ report.user.username }}</b> | 
+          Date: {{ report.date }} | 
+          Location: {{ report.location }}
+        </p>
+        <p class="desc">{{ report.description }}</p>
+        {% if report.image %}
+          <img src="{{ report.image.url }}" alt="Item Image">
+        {% endif %}
+        <p class="phone">📞 Contact: {{ report.phone_number }}</p>
+      </div>
+    {% empty %}
+      <p>No reports found.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>

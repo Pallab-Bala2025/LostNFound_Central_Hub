@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome - Lost & Found</title>
+    <style>
+        /* Background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #252547, #3a3a70);
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container */
+        .container {
+            background: rgba(20, 20, 35, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            width: 450px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Title */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #00cfff;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #111;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #00cfff, #007bff);
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #007bff, #00cfff);
+            transform: scale(1.05);
+        }
+
+        .btn-signup {
+            background: linear-gradient(135deg, #00ffb3, #28a745);
+        }
+
+        .btn-signup:hover {
+            background: linear-gradient(135deg, #28a745, #00ffb3);
+            transform: scale(1.05);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Lost & Found System</h1>
+        <p>Please choose an option below:</p>
+
+        <a href="{% url 'login' %}" class="btn btn-login">Login</a>
+        <a href="{% url 'signup' %}" class="btn btn-signup">Sign Up</a>
+    </div>
+</body>
+</html>

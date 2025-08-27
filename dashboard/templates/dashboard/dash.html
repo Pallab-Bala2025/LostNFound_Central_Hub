@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    /* ===== Global Styles ===== */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .navbar .username {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .navbar .logout-btn {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .navbar .logout-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 75, 43, 0.8);
+    }
+
+    /* ===== Main Content ===== */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 30px;
+    }
+
+    /* ===== Message Box ===== */
+    .message-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      width: 70%;
+      max-width: 600px;
+      min-height: 140px;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      font-size: 17px;
+      line-height: 1.6;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* ===== Buttons ===== */
+    .btn-container {
+      display: flex;
+      gap: 25px;
+    }
+    .btn {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    .btn-report {
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      color: #fff;
+    }
+    .btn-report:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 114, 255, 0.6);
+    }
+    .btn-submitted {
+      background: linear-gradient(45deg, #9b59b6, #8e44ad);
+      color: #fff;
+    }
+    .btn-submitted:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(155, 89, 182, 0.6);
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <span class="username">👤  {{ user.username }}</span>
+    <a href="{% url 'login' %}"><button class="btn logout-btn">Logout</button></a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="message-box">
+      🚀 Welcome to your dashboard!  
+      Here you can easily report new issues or review all submitted reports.
+    </div>
+    <div class="btn-container">
+      <a href="{% url 'report' %}"><button class="btn btn-report">📌 Report</button></a>
+      <a href="{% url 'central_hub' %}"><button class="btn btn-submitted">📂 Submitted Reports</button></a>
+    </div>
+  </div>
+
+</body>
+</html>

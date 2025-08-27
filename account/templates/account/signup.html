@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        /* Background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #252547, #3a3a70);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Form container */
+        .form-container {
+            background: rgba(20, 20, 35, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            animation: fadeIn 1s ease-in-out;
+            margin-left: 50px;
+        }
+
+        /* Heading */
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #00ffb3;
+            letter-spacing: 1px;
+        }
+
+        /* Input fields */
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+            background: #2d2d4a;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            background: #3e3e63;
+            box-shadow: 0 0 10px #00ffb3;
+        }
+
+        /* Button */
+        button {
+            margin-top: 15px;
+            width: 95%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ffb3, #00cfff);
+            color: #111;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #00cfff, #00ffb3);
+            transform: scale(1.05);
+        }
+
+        /* Links */
+        a {
+            display: block;
+            margin-top: 15px;
+            color: #00cfff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #00ffb3;
+        }
+
+        /* Messages */
+        .messages p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #ff6b6b;
+        }
+
+        /* Fade animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-info">
+        <h2>✨ Join the Lost & Found Community of SRM University</h2>
+            <p>Every day, things get misplaced on campus — keys, ID cards, books, even umbrellas.</p>
+        <p>By signing up, you become part of a community that helps each other reconnect with what’s lost.</p>
+        
+        <h4>With your account, you can:</h4>
+        <ul>
+            <li>🔍 Search and claim your lost belongings</li>
+            <li>📢 Post found items to help classmates</li>
+            <li>🎓 Stay updated with campus lost & found notices</li>
+        </ul>
+        
+        <small>👉 Use your <b>University Email ID</b> to sign up and keep our community safe.</small>
+    </div>
+
+    <div class="form-container">
+        <h2>Signup</h2>
+
+        <div class="messages">
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="email" name="email" placeholder="Enter College Email" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <a href="{% url 'login' %}">Already have an account? Login here</a>
+    </div>
+</body>
+</html>

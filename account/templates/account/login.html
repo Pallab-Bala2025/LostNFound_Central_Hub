@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Lost & Found</title>
+    <style>
+        /* Background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #252547, #3a3a70);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column; /* Stack text above form */
+        }
+
+        /* Login info text */
+        .login-info {
+            max-width: 500px;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .login-info h2 {
+            color: #00cfff;
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+
+        .login-info p, .login-info small {
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        .login-info small {
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* Form container */
+        .form-container {
+            background: rgba(20, 20, 35, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Heading */
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #00cfff;
+            letter-spacing: 1px;
+        }
+
+        /* Input fields */
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+            background: #2d2d4a;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            background: #3e3e63;
+            box-shadow: 0 0 10px #00cfff;
+        }
+
+        /* Button */
+        button {
+            margin-top: 15px;
+            width: 95%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00cfff, #00ffb3);
+            color: #111;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #00ffb3, #00cfff);
+            transform: scale(1.05);
+        }
+
+        /* Links */
+        a {
+            display: block;
+            margin-top: 15px;
+            color: #00cfff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #00ffb3;
+        }
+
+        /* Messages */
+        .messages p {
+            margin: 10px 0;
+            font-size: 14px;
+            color: #13940c;
+        }
+
+        /* Fade animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-info">
+        <h2>🔑 Login to University Lost & Found Hub</h2>
+        <p>Welcome to the official <b>Lost & Found Portal</b> of SRM University.</p>
+        <p>Here you can report lost items, search for found belongings, and reconnect with your valuables.</p>
+        <small>💡Use your University ID & Password to log in. If you don’t have an account, please register or contact admin.</small>
+    </div>
+
+    <div class="form-container">
+        <h2>Login</h2>
+
+        <div class="messages">
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <a href="{% url 'index' %}">⬅ Back to Home</a>
+        <a href="{% url 'signup' %}">Don't have an account? Sign Up</a>
+    </div>
+</body>
+</html>
